@@ -8,7 +8,7 @@
       "type": "msedge",
       "request": "launch",
       "name": "Launch Edge against localhost",
-      "url": "http://localhost",
+      "url": "http://182.92.8.226:10911",
       "webRoot": "${workspaceFolder}/src",
       "sourceMaps": true
     }
