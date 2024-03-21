@@ -47,10 +47,10 @@
           <el-form-item label="产品单位" prop="unit">
             <el-select v-model="formData.unit" class="w-1/1" placeholder="请选择单位">
               <el-option
-                v-for="dict in getIntDictOptions(DICT_TYPE.CRM_PRODUCT_UNIT)"
-                :key="dict.value"
-                :label="dict.label"
-                :value="dict.value"
+                v-for="unit in unitList"
+                :key="unit.id"
+                :label="unit.name"
+                :value="unit.id"
               />
             </el-select>
           </el-form-item>
@@ -104,6 +104,7 @@ import * as ProductCategoryApi from '@/api/crm/product/category'
 import { defaultProps, handleTree } from '@/utils/tree'
 import { getSimpleUserList, UserVO } from '@/api/system/user'
 import { useUserStore } from '@/store/modules/user'
+import { ProductUnitApi, ProductUnitVO } from '@/api/erp/product/unit'
 
 defineOptions({ name: 'CrmProductForm' })
 
@@ -115,6 +116,7 @@ const dialogTitle = ref('') // 弹窗的标题
 const formLoading = ref(false) // 表单的加载中：1）修改时的数据加载；2）提交的按钮禁用
 const formType = ref('') // 表单的类型：create - 新增；update - 修改
 const userId = useUserStore().getUser.id // 当前登录的编号
+const unitList = ref<ProductUnitVO[]>([]) // 产品单位列表
 const formData = ref({
   id: undefined,
   name: undefined,
@@ -143,6 +145,8 @@ const open = async (type: string, id?: number) => {
   dialogTitle.value = t('action.' + type)
   formType.value = type
   resetForm()
+  // 产品单位
+  unitList.value = await ProductUnitApi.getProductUnitSimpleListCrp()
   // 修改时，设置数据
   if (id) {
     formLoading.value = true

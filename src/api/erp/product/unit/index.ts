@@ -18,6 +18,10 @@ export const ProductUnitApi = {
   getProductUnitSimpleList: async () => {
     return await request.get({ url: `/erp/product-unit/simple-list` })
   },
+  // crm-查询产品单位精简列表
+  getProductUnitSimpleListCrp: async () => {
+    return await request.get({ url: `/crm/product-unit/simple-list` })
+  },
 
   // 查询产品单位详情
   getProductUnit: async (id: number) => {
