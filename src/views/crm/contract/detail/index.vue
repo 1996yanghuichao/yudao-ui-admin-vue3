@@ -20,15 +20,8 @@
         <ContractProductList :contract="contract" />
       </el-tab-pane>
       <el-tab-pane label="回款">
-        <ReceivablePlanList
-          :contract-id="contract.id!"
-          :customer-id="contract.customerId"
-          @create-receivable="createReceivable"
-        />
-        <ReceivableList
-          ref="receivableListRef"
-          :contract-id="contract.id!"
-          :customer-id="contract.customerId"
+        <receivableIndex
+          ref="childGetProps"
         />
       </el-tab-pane>
       <el-tab-pane label="团队成员">
@@ -63,9 +56,7 @@ import ContractForm from '@/views/crm/contract/ContractForm.vue'
 import CrmTransferForm from '@/views/crm/permission/components/TransferForm.vue'
 import PermissionList from '@/views/crm/permission/components/PermissionList.vue'
 import FollowUpList from '@/views/crm/followup/index.vue'
-import ReceivableList from '@/views/crm/receivable/components/ReceivableList.vue'
-import ReceivablePlanList from '@/views/crm/receivable/plan/components/ReceivablePlanList.vue'
-
+import receivableIndex from '@/views/crm/contract/detail/receivableIndex.vue'
 defineOptions({ name: 'CrmContractDetail' })
 const props = defineProps<{ id?: number }>()
 
@@ -83,11 +74,13 @@ const openForm = (type: string, id?: number) => {
 }
 
 /** 获取详情 */
+ let childGetProps = ref()
 const getContractData = async () => {
   loading.value = true
   try {
     contract.value = await ContractApi.getContract(contractId.value)
     await getOperateLog(contractId.value)
+    childGetProps.value.open(contract.value)
   } finally {
     loading.value = false
   }
@@ -106,15 +99,10 @@ const getOperateLog = async (contractId: number) => {
   logList.value = data.list
 }
 
-/** 从回款计划创建回款 */
-const receivableListRef = ref<InstanceType<typeof ReceivableList>>() // 回款列表 Ref
-const createReceivable = (planData: any) => {
-  receivableListRef.value?.createReceivable(planData)
-}
-
 /** 转移 */
 // TODO @puhui999：这个组件，要不传递业务类型，然后组件里判断 title 和 api 能调用哪个；整体治理掉；好呢
 const transferFormRef = ref<InstanceType<typeof CrmTransferForm>>() // 合同转移表单 ref
+  console.log('transferFormRef', transferFormRef.value)
 const transferContract = () => {
   transferFormRef.value?.open('合同转移', contract.value.id, ContractApi.transferContract)
 }
