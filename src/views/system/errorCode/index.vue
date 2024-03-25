@@ -1,5 +1,5 @@
 <template>
-  <doc-alert title="异常处理（错误码）" url="https://doc.iocoder.cn/exception/" />
+  <!-- <doc-alert title="异常处理（错误码）" url="https://doc.iocoder.cn/exception/" /> -->
 
   <!-- 搜索工作栏 -->
   <ContentWrap>

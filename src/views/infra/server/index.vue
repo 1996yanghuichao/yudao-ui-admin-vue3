@@ -1,5 +1,5 @@
 <template>
-  <doc-alert title="服务监控" url="https://doc.iocoder.cn/server-monitor/" />
+  <!-- <doc-alert title="服务监控" url="https://doc.iocoder.cn/server-monitor/" /> -->
 
   <ContentWrap>
     <IFrame v-if="!loading" v-loading="loading" :src="src" />
