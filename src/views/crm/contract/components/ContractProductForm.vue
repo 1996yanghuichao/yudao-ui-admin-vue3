@@ -42,7 +42,7 @@
           <dict-tag :type="DICT_TYPE.CRM_PRODUCT_UNIT" :value="row.productUnit" />
         </template>
       </el-table-column>
-      <el-table-column label="价格（元）" min-width="120">
+      <el-table-column label="购入价格（元）" min-width="120">
         <template #default="{ row }">
           <el-form-item class="mb-0px!">
             <el-input disabled v-model="row.productPrice" :formatter="erpPriceInputFormatter" />

@@ -14,17 +14,13 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="负责人" prop="ownerUserId">
-            <el-select
-              v-model="formData.ownerUserId"
-              :disabled="formType !== 'create'"
-              class="w-1/1"
-            >
+          <el-form-item label="回款方式" prop="returnType">
+            <el-select v-model="formData.returnType" class="w-1/1" placeholder="请选择回款方式">
               <el-option
-                v-for="item in userOptions"
-                :key="item.id"
-                :label="item.nickname"
-                :value="item.id"
+                v-for="dict in getIntDictOptions(DICT_TYPE.CRM_RECEIVABLE_RETURN_TYPE)"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
               />
             </el-select>
           </el-form-item>
@@ -63,42 +59,9 @@
               <el-option
                 v-for="data in contractList"
                 :key="data.id"
-                :label="data.name"
+                :label="data.id!+ '-'+data.name"
                 :value="data.id!"
                 :disabled="data.auditStatus !== 20"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="回款期数" prop="planId">
-            <el-select
-              v-model="formData.planId"
-              :disabled="formType !== 'create' || !formData.contractId"
-              class="!w-1/1"
-              @change="handleReceivablePlanChange"
-              placeholder="请选择回款期数"
-            >
-              <el-option
-                v-for="data in receivablePlanList"
-                :key="data.id"
-                :label="'第 ' + data.period + ' 期'"
-                :value="data.id!"
-                :disabled="data.receivableId"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="回款方式" prop="returnType">
-            <el-select v-model="formData.returnType" class="w-1/1" placeholder="请选择回款方式">
-              <el-option
-                v-for="dict in getIntDictOptions(DICT_TYPE.CRM_RECEIVABLE_RETURN_TYPE)"
-                :key="dict.value"
-                :label="dict.label"
-                :value="dict.value"
               />
             </el-select>
           </el-form-item>
@@ -196,10 +159,6 @@ const open = async (
   userOptions.value = await UserApi.getSimpleUserList()
   // 获得客户列表
   customerList.value = await CustomerApi.getCustomerSimpleList()
-  // 默认新建时选中自己
-  if (formType.value === 'create') {
-    formData.value.ownerUserId = useUserStore().getUser.id
-  }
   // 从回款计划创建回款
   if (receivablePlan) {
     formData.value.customerId = receivablePlan.customerId
@@ -207,7 +166,6 @@ const open = async (
     formData.value.contractId = receivablePlan.contractId
     await handleContractChange(receivablePlan.contractId)
     if (receivablePlan.id) {
-      formData.value.planId = receivablePlan.id
       formData.value.price = receivablePlan.price
       formData.value.returnType = receivablePlan.returnType
     }
@@ -260,8 +218,6 @@ const handleCustomerChange = async (customerId: number) => {
 
 /** 处理切换合同 */
 const handleContractChange = async (contractId: number) => {
-  // 重置回款计划编号
-  formData.value.planId = undefined
   if (contractId) {
     // 获得回款计划列表
     receivablePlanList.value = []
@@ -277,16 +233,4 @@ const handleContractChange = async (contractId: number) => {
   }
 }
 
-/** 处理切换回款计划 */
-const handleReceivablePlanChange = (planId: number) => {
-  if (!planId) {
-    return
-  }
-  const receivablePlan = receivablePlanList.value.find((item) => item.id === planId)
-  if (!receivablePlan) {
-    return
-  }
-  formData.value.price = receivablePlan.price
-  formData.value.returnType = receivablePlan.returnType
-}
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <doc-alert title="【商机】商机管理、商机状态" url="https://doc.iocoder.cn/crm/business/" />
-  <doc-alert title="【通用】数据权限" url="https://doc.iocoder.cn/crm/permission/" />
+  <!-- <doc-alert title="【商机】商机管理、商机状态" url="https://doc.iocoder.cn/crm/business/" />
+  <doc-alert title="【通用】数据权限" url="https://doc.iocoder.cn/crm/permission/" /> -->
 
   <ContentWrap>
     <!-- 搜索工作栏 -->
@@ -125,8 +125,16 @@
         fixed="right"
         width="120"
       />
-      <el-table-column label="操作" align="center" fixed="right" width="130px">
+      <el-table-column label="操作" align="center" fixed="right" width="160px">
         <template #default="scope">
+          <el-button
+            link
+            type="primary"
+            @click="openUpRecord(scope.row.id)"
+            v-hasPermi="['crm:business:update']"
+          >
+            跟进
+          </el-button>
           <el-button
             link
             type="primary"
@@ -157,6 +165,8 @@
 
   <!-- 表单弹窗：添加/修改 -->
   <BusinessForm ref="formRef" @success="getList" />
+  <!-- 表单弹窗：添加/修改 -->
+  <FollowUpRecordForm ref="formRefUpRecord" @success="getList" />
 </template>
 
 <script setup lang="ts">
@@ -166,6 +176,9 @@ import * as BusinessApi from '@/api/crm/business'
 import BusinessForm from './BusinessForm.vue'
 import { erpPriceTableColumnFormatter } from '@/utils'
 import { TabsPaneContext } from 'element-plus'
+import FollowUpRecordForm from '@/views/crm/followup/FollowUpRecordForm.vue'
+import { BizTypeEnum } from '@/api/crm/permission'
+import { StringDecoder } from 'string_decoder'
 
 defineOptions({ name: 'CrmBusiness' })
 
@@ -231,7 +244,12 @@ const formRef = ref()
 const openForm = (type: string, id?: number) => {
   formRef.value.open(type, id)
 }
-
+// 跟进
+const formRefUpRecord = ref<InstanceType<typeof FollowUpRecordForm>>()
+const openUpRecord = (id)=>{
+  let type = BizTypeEnum.CRM_BUSINESS
+  formRefUpRecord.value?.open(type, id.toString())
+}
 /** 删除按钮操作 */
 const handleDelete = async (id: number) => {
   try {

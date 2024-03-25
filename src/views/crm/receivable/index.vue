@@ -1,6 +1,6 @@
 <template>
-  <doc-alert title="【回款】回款管理、回款计划" url="https://doc.iocoder.cn/crm/receivable/" />
-  <doc-alert title="【通用】数据权限" url="https://doc.iocoder.cn/crm/permission/" />
+  <!-- <doc-alert title="【回款】回款管理、回款计划" url="https://doc.iocoder.cn/crm/receivable/" />
+  <doc-alert title="【通用】数据权限" url="https://doc.iocoder.cn/crm/permission/" /> -->
 
   <ContentWrap>
     <!-- 搜索工作栏 -->
@@ -69,11 +69,6 @@
 
   <!-- 列表 -->
   <ContentWrap>
-    <el-tabs v-model="activeName" @tab-click="handleTabClick">
-      <el-tab-pane label="我负责的" name="1" />
-      <el-tab-pane label="我参与的" name="2" />
-      <el-tab-pane label="下属负责的" name="3" />
-    </el-tabs>
     <el-table v-loading="loading" :data="list" :show-overflow-tooltip="true" :stripe="true">
       <el-table-column align="center" fixed="left" label="回款编号" prop="no" width="180">
         <template #default="scope">
@@ -230,14 +225,7 @@ const queryParams = reactive({
 })
 const queryFormRef = ref() // 搜索的表单
 const exportLoading = ref(false) // 导出的加载中
-const activeName = ref('1') // 列表 tab
 const customerList = ref<CustomerApi.CustomerVO[]>([]) // 客户列表
-
-/** tab 切换 */
-const handleTabClick = (tab: TabsPaneContext) => {
-  queryParams.sceneType = tab.paneName
-  handleQuery()
-}
 
 /** 查询列表 */
 const getList = async () => {

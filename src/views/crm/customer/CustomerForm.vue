@@ -1,4 +1,5 @@
 <template>
+  <!-- 新增/修改 -->
   <Dialog v-model="dialogVisible" :title="dialogTitle">
     <el-form
       ref="formRef"
@@ -28,11 +29,6 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="手机" prop="mobile">
-            <el-input v-model="formData.mobile" placeholder="请输入手机" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
           <el-form-item label="负责人" prop="ownerUserId">
             <el-select
               v-model="formData.ownerUserId"
@@ -48,32 +44,6 @@
             </el-select>
           </el-form-item>
         </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="电话" prop="telephone">
-            <el-input v-model="formData.telephone" placeholder="请输入电话" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="邮箱" prop="email">
-            <el-input v-model="formData.email" placeholder="请输入邮箱" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="微信" prop="wechat">
-            <el-input v-model="formData.wechat" placeholder="请输入微信" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="QQ" prop="qq">
-            <el-input v-model="formData.qq" placeholder="请输入 QQ" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
         <el-col :span="12">
           <el-form-item label="客户行业" prop="industryId">
             <el-select v-model="formData.industryId" placeholder="请选择客户行业" class="w-1/1">
@@ -86,9 +56,23 @@
             </el-select>
           </el-form-item>
         </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="12">
           <el-form-item label="客户级别" prop="level">
             <el-select v-model="formData.level" placeholder="请选择客户级别" class="w-1/1">
+              <el-option
+                v-for="dict in getIntDictOptions(DICT_TYPE.CRM_CUSTOMER_LEVEL)"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="客户分类" prop="level">
+            <el-select v-model="formData.level" placeholder="客户分类-没联调" class="w-1/1">
               <el-option
                 v-for="dict in getIntDictOptions(DICT_TYPE.CRM_CUSTOMER_LEVEL)"
                 :key="dict.value"
@@ -120,16 +104,6 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
-          <el-form-item label="下次联系时间" prop="contactNextTime">
-            <el-date-picker
-              v-model="formData.contactNextTime"
-              placeholder="选择下次联系时间"
-              type="datetime"
-              value-format="x"
-            />
-          </el-form-item>
-        </el-col>
         <el-col :span="12">
           <el-form-item label="备注" prop="remark">
             <el-input type="textarea" v-model="formData.remark" placeholder="请输入备注" />
@@ -163,13 +137,7 @@ const userOptions = ref<UserApi.UserVO[]>([]) // 用户列表
 const formData = ref({
   id: undefined,
   name: undefined,
-  contactNextTime: undefined,
   ownerUserId: 0,
-  mobile: undefined,
-  telephone: undefined,
-  qq: undefined,
-  wechat: undefined,
-  email: undefined,
   areaId: undefined,
   detailAddress: undefined,
   industryId: undefined,
@@ -240,13 +208,7 @@ const resetForm = () => {
   formData.value = {
     id: undefined,
     name: undefined,
-    contactNextTime: undefined,
     ownerUserId: 0,
-    mobile: undefined,
-    telephone: undefined,
-    qq: undefined,
-    wechat: undefined,
-    email: undefined,
     areaId: undefined,
     detailAddress: undefined,
     industryId: undefined,

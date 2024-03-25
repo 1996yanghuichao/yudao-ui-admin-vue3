@@ -119,6 +119,7 @@ const formRef = ref() // 表单 Ref
 
 /** 打开弹窗 */
 const open = async (bizType: number, bizId: number) => {
+  console.log('bizType', bizType, bizId)
   dialogVisible.value = true
   resetForm()
   formData.value.bizType = bizType

@@ -14,23 +14,6 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="负责人" prop="ownerUserId">
-            <el-select
-              v-model="formData.ownerUserId"
-              placeholder="请选择负责人"
-              :disabled="formData.id"
-              class="w-1/1"
-            >
-              <el-option
-                v-for="user in userList"
-                :key="user.id"
-                :label="user.nickname"
-                :value="user.id"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
           <el-form-item label="产品类型" prop="categoryId">
             <el-cascader
               v-model="formData.categoryId"
@@ -61,10 +44,10 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="价格" prop="price">
+          <el-form-item label="购入价格" prop="price">
             <el-input-number
               v-model="formData.price"
-              placeholder="请输入价格"
+              placeholder="请输入购入价格"
               :min="0"
               :precision="2"
               :step="0.1"
@@ -126,14 +109,12 @@ const formData = ref({
   status: undefined,
   categoryId: undefined,
   description: undefined,
-  ownerUserId: -1
 })
 const formRules = reactive({
   name: [{ required: true, message: '产品名称不能为空', trigger: 'blur' }],
   no: [{ required: true, message: '产品编码不能为空', trigger: 'blur' }],
   status: [{ required: true, message: '状态不能为空', trigger: 'change' }],
   categoryId: [{ required: true, message: '产品分类ID不能为空', trigger: 'blur' }],
-  ownerUserId: [{ required: true, message: '负责人不能为空', trigger: 'blur' }],
   price: [{ required: true, message: '价格不能为空', trigger: 'blur' }]
 })
 
@@ -155,8 +136,6 @@ const open = async (type: string, id?: number) => {
     } finally {
       formLoading.value = false
     }
-  } else {
-    formData.value.ownerUserId = userId
   }
 }
 defineExpose({ open }) // 提供 open 方法，用于打开弹窗
@@ -198,7 +177,6 @@ const resetForm = () => {
     status: undefined,
     categoryId: undefined,
     description: undefined,
-    ownerUserId: -1
   }
   formRef.value?.resetFields()
 }

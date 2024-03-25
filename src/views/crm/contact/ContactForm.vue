@@ -14,24 +14,6 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="负责人" prop="ownerUserId">
-            <el-select
-              v-model="formData.ownerUserId"
-              :disabled="formType !== 'create'"
-              class="w-1/1"
-            >
-              <el-option
-                v-for="item in userOptions"
-                :key="item.id"
-                :label="item.nickname"
-                :value="item.id"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
           <el-form-item label="客户名称" prop="customerId">
             <el-select
               :disabled="formData.customerDefault"
@@ -48,42 +30,44 @@
             </el-select>
           </el-form-item>
         </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="12">
           <el-form-item label="手机" prop="mobile">
             <el-input v-model="formData.mobile" placeholder="请输入手机" />
           </el-form-item>
         </el-col>
-      </el-row>
-      <el-row>
         <el-col :span="12">
           <el-form-item label="电话" prop="telephone">
             <el-input v-model="formData.telephone" placeholder="请输入电话" />
           </el-form-item>
         </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="12">
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="formData.email" placeholder="请输入邮箱" />
           </el-form-item>
         </el-col>
-      </el-row>
-      <el-row>
         <el-col :span="12">
           <el-form-item label="微信" prop="wechat">
             <el-input v-model="formData.wechat" placeholder="请输入微信" />
           </el-form-item>
         </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="12">
           <el-form-item label="QQ" prop="qq">
             <el-input v-model="formData.qq" placeholder="请输入 QQ" />
           </el-form-item>
         </el-col>
-      </el-row>
-      <el-row>
         <el-col :span="12">
           <el-form-item label="职位" prop="post">
             <el-input v-model="formData.post" placeholder="请输入职位" />
           </el-form-item>
         </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="12">
           <el-form-item label="关键决策人" prop="master" style="width: 400px">
             <el-radio-group v-model="formData.master">
@@ -97,8 +81,6 @@
             </el-radio-group>
           </el-form-item>
         </el-col>
-      </el-row>
-      <el-row>
         <el-col :span="12">
           <el-form-item label="性别" prop="sex">
             <el-select v-model="formData.sex" placeholder="请选择" class="w-1/1">
@@ -107,19 +89,6 @@
                 :key="dict.value"
                 :label="dict.label"
                 :value="dict.value"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="直属上级" prop="parentId">
-            <el-select v-model="formData.parentId" placeholder="请选择直属上级" class="w-1/1">
-              <el-option
-                v-for="item in contactList"
-                :key="item.id"
-                :disabled="item.id == formData.id"
-                :label="item.name"
-                :value="item.id"
               />
             </el-select>
           </el-form-item>
@@ -146,16 +115,6 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
-          <el-form-item label="下次联系时间" prop="contactNextTime">
-            <el-date-picker
-              v-model="formData.contactNextTime"
-              placeholder="选择下次联系时间"
-              type="datetime"
-              value-format="x"
-            />
-          </el-form-item>
-        </el-col>
         <el-col :span="12">
           <el-form-item label="备注" prop="remark">
             <el-input type="textarea" v-model="formData.remark" placeholder="请输入备注" />
@@ -190,8 +149,6 @@ const formData = ref({
   id: undefined,
   name: undefined,
   customerId: undefined,
-  contactNextTime: undefined,
-  ownerUserId: 0,
   mobile: undefined,
   telephone: undefined,
   qq: undefined,
@@ -202,7 +159,6 @@ const formData = ref({
   sex: undefined,
   master: false,
   post: undefined,
-  parentId: undefined,
   remark: undefined,
   businessId: undefined,
   customerDefault: false
@@ -210,7 +166,6 @@ const formData = ref({
 const formRules = reactive({
   name: [{ required: true, message: '姓名不能为空', trigger: 'blur' }],
   customerId: [{ required: true, message: '客户不能为空', trigger: 'blur' }],
-  ownerUserId: [{ required: true, message: '负责人不能为空', trigger: 'blur' }]
 })
 const formRef = ref() // 表单 Ref
 const userOptions = ref<UserApi.UserVO[]>([]) // 用户列表
@@ -249,10 +204,6 @@ const open = async (type: string, id?: number, customerId?: number, businessId?:
   areaList.value = await AreaApi.getAreaTree()
   // 获得用户列表
   userOptions.value = await UserApi.getSimpleUserList()
-  // 默认新建时选中自己
-  if (formType.value === 'create') {
-    formData.value.ownerUserId = useUserStore().getUser.id
-  }
 }
 defineExpose({ open }) // 提供 open 方法，用于打开弹窗
 
@@ -288,8 +239,6 @@ const resetForm = () => {
     id: undefined,
     name: undefined,
     customerId: undefined,
-    contactNextTime: undefined,
-    ownerUserId: 0,
     mobile: undefined,
     telephone: undefined,
     qq: undefined,
@@ -300,7 +249,6 @@ const resetForm = () => {
     sex: undefined,
     master: false,
     post: undefined,
-    parentId: undefined,
     remark: undefined,
     businessId: undefined,
     customerDefault: false

@@ -19,24 +19,6 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="负责人" prop="ownerUserId">
-            <el-select
-              v-model="formData.ownerUserId"
-              :disabled="formType !== 'create'"
-              class="w-1/1"
-            >
-              <el-option
-                v-for="item in userOptions"
-                :key="item.id"
-                :label="item.nickname"
-                :value="item.id"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="8">
           <el-form-item label="客户名称" prop="customerId">
             <el-select
               v-model="formData.customerId"
@@ -53,6 +35,8 @@
             </el-select>
           </el-form-item>
         </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="8">
           <el-form-item label="商机名称" prop="businessId">
             <el-select
@@ -68,6 +52,41 @@
                 :value="item.id!"
               />
             </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="负责人" prop="ownerUserId">
+            <el-select
+              v-model="formData.ownerUserId"
+              :disabled="formType !== 'create'"
+              class="w-1/1"
+              v-if="!formData.businessId"
+            >
+              <el-option
+                v-for="item in userOptions"
+                :key="item.id"
+                :label="item.nickname"
+                :value="item.id"
+              />
+            </el-select>
+            <el-input v-else v-model="formData.ownerUserName" clearable disabled />
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="门店" prop="ownerUserId">
+            <!-- <el-select
+              v-model="formData.ownerUserId"
+              :disabled="formType !== 'create'"
+              class="w-1/1"
+            >
+              <el-option
+                v-for="item in userOptions"
+                :key="item.id"
+                :label="item.nickname"
+                :value="item.id"
+              />
+            </el-select> -->
+            <span>未联调</span>
           </el-form-item>
         </el-col>
       </el-row>
@@ -154,7 +173,7 @@
         </el-tabs>
       </ContentWrap>
       <el-row>
-        <el-col :span="8">
+        <el-col :span="10">
           <el-form-item label="产品总金额" prop="totalProductPrice">
             <el-input
               disabled
@@ -163,7 +182,7 @@
             />
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="10">
           <el-form-item label="整单折扣（%）" prop="discountPercent">
             <el-input-number
               v-model="formData.discountPercent"
@@ -175,7 +194,10 @@
             />
           </el-form-item>
         </el-col>
-        <el-col :span="8">
+        
+      </el-row>
+      <el-row>
+        <el-col :span="10">
           <el-form-item label="折扣后金额" prop="totalPrice">
             <el-input
               disabled
@@ -183,6 +205,16 @@
               placeholder="请输入商机金额"
               :formatter="erpPriceTableColumnFormattere"
             />
+          </el-form-item>
+        </el-col>
+        <el-col :span="10">
+          <el-form-item label="销售运费价格" prop="totalPrice">
+            <!-- <el-input
+              v-model="formData.totalPrice"
+              placeholder="请输入销售运费价格"
+              :formatter="erpPriceTableColumnFormattere"
+            /> -->
+            <span>未联调</span>
           </el-form-item>
         </el-col>
       </el-row>
@@ -222,6 +254,7 @@ const formData = ref({
   signUserId: undefined,
   signContactId: undefined,
   ownerUserId: undefined,
+  ownerUserName: undefined,
   discountPercent: 0,
   totalProductPrice: undefined,
   remark: undefined,
@@ -334,6 +367,7 @@ const resetForm = () => {
     signUserId: undefined,
     signContactId: undefined,
     ownerUserId: undefined,
+    ownerUserName: undefined,
     discountPercent: 0,
     totalProductPrice: undefined,
     remark: undefined,
@@ -356,6 +390,8 @@ const handleBusinessChange = async (businessId: number) => {
     item.contractPrice = item.businessPrice
   })
   formData.value.products = business.products
+  formData.value.ownerUserId = business.ownerUserId
+  formData.value.ownerUserName = business.ownerUserName
 }
 
 /** 动态获取客户联系人 */
