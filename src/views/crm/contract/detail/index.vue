@@ -1,6 +1,7 @@
 <!-- 合同详情页面组件-->
 <template>
-  <ContractDetailsHeader v-loading="loading" :contract="contract">
+  <div v-loading="loading" >
+    <ContractDetailsHeader :contract="contract">
     <el-button v-if="permissionListRef?.validateWrite" @click="openForm('update', contract.id)">
       编辑
     </el-button>
@@ -8,6 +9,7 @@
       转移
     </el-button>
   </ContractDetailsHeader>
+  </div>
   <el-col>
     <el-tabs>
       <el-tab-pane label="跟进记录">
@@ -44,6 +46,8 @@
   <CrmTransferForm ref="transferFormRef" @success="close" />
 </template>
 <script lang="ts" setup>
+import {ref} from 'vue'
+import {useRouter, useRoute} from 'vue-router'
 import { useTagsViewStore } from '@/store/modules/tagsView'
 import { OperateLogV2VO } from '@/api/system/operatelog'
 import * as ContractApi from '@/api/crm/contract'
@@ -102,7 +106,6 @@ const getOperateLog = async (contractId: number) => {
 /** 转移 */
 // TODO @puhui999：这个组件，要不传递业务类型，然后组件里判断 title 和 api 能调用哪个；整体治理掉；好呢
 const transferFormRef = ref<InstanceType<typeof CrmTransferForm>>() // 合同转移表单 ref
-  console.log('transferFormRef', transferFormRef.value)
 const transferContract = () => {
   transferFormRef.value?.open('合同转移', contract.value.id, ContractApi.transferContract)
 }
