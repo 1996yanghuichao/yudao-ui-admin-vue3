@@ -19,7 +19,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="产品价格（元）"
+        label="购入价格（元）"
         align="center"
         prop="productPrice"
         min-width="140"

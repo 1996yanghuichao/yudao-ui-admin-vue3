@@ -10,6 +10,7 @@
           <el-descriptions-item label="合同编号">{{ contract.no }}</el-descriptions-item>
           <el-descriptions-item label="合同名称">{{ contract.name }}</el-descriptions-item>
           <el-descriptions-item label="客户名称">{{ contract.customerName }}</el-descriptions-item>
+          <el-descriptions-item label="门店">{{ contract.storeName }}</el-descriptions-item>
           <el-descriptions-item label="商机名称">{{ contract.businessName }}</el-descriptions-item>
           <el-descriptions-item label="合同金额（元）">
             {{ erpPriceInputFormatter(contract.totalPrice) }}

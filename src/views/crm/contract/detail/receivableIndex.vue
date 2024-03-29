@@ -176,7 +176,7 @@ const getList = async () => {
 // 调用数据
 let open = (_obj: any)=>{
   console.log('=====调用了',_obj) // no
-  queryParams.contractId = _obj.no
+  queryParams.contractId = _obj.id
   getList()
 }
 defineExpose({ open }) // 提供 open 方法，用于打开弹窗

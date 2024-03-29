@@ -12,22 +12,17 @@
           <el-descriptions-item label="客户来源">
             <dict-tag :type="DICT_TYPE.CRM_CUSTOMER_SOURCE" :value="customer.source" />
           </el-descriptions-item>
-          <el-descriptions-item label="手机">{{ customer.mobile }}</el-descriptions-item>
-          <el-descriptions-item label="电话">{{ customer.telephone }}</el-descriptions-item>
-          <el-descriptions-item label="邮箱">{{ customer.email }}</el-descriptions-item>
           <el-descriptions-item label="地址">
             {{ customer.areaName }} {{ customer.detailAddress }}
           </el-descriptions-item>
-          <el-descriptions-item label="QQ">{{ customer.qq }}</el-descriptions-item>
-          <el-descriptions-item label="微信">{{ customer.wechat }}</el-descriptions-item>
           <el-descriptions-item label="客户行业">
             <dict-tag :type="DICT_TYPE.CRM_CUSTOMER_INDUSTRY" :value="customer.industryId" />
           </el-descriptions-item>
           <el-descriptions-item label="客户级别">
             <dict-tag :type="DICT_TYPE.CRM_CUSTOMER_LEVEL" :value="customer.level" />
           </el-descriptions-item>
-          <el-descriptions-item label="下次联系时间">
-            {{ formatDate(customer.contactNextTime) }}
+          <el-descriptions-item label="客户分类">
+            <dict-tag :type="DICT_TYPE.CRM_CUSTOMER_CLASS" :value="customer.classId" />
           </el-descriptions-item>
           <el-descriptions-item label="备注">{{ customer.remark }}</el-descriptions-item>
         </el-descriptions>

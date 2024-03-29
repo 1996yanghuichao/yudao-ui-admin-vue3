@@ -7,6 +7,7 @@ export interface ContractVO {
   no: string
   customerId: number
   customerName?: string
+  storeName? : string
   businessId: number
   businessName: string
   contactLastTime: Date

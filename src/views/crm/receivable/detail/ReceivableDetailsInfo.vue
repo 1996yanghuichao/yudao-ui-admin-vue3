@@ -30,9 +30,6 @@
           <span class="text-base font-bold">系统信息</span>
         </template>
         <el-descriptions :column="4">
-          <el-descriptions-item label="负责人">
-            {{ receivable.ownerUserName }}
-          </el-descriptions-item>
           <el-descriptions-item label="创建人">
             {{ receivable.creatorName }}
           </el-descriptions-item>

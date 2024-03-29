@@ -107,6 +107,7 @@ const { t } = useI18n() // 国际化
 const loading = ref(true) // 列表的加载中
 const list = ref<FollowUpRecordVO[]>([]) // 列表的数据
 const total = ref(0) // 列表的总页数
+console.log('bizType', props.bizType)
 const queryParams = reactive({
   pageNo: 1,
   pageSize: 10,
@@ -121,6 +122,7 @@ const getList = async () => {
     const data = await FollowUpRecordApi.getFollowUpRecordPage(queryParams)
     list.value = data.list
     total.value = data.total
+    console.log('列表数据', data)
   } finally {
     loading.value = false
   }
@@ -161,6 +163,7 @@ watch(
   () => {
     queryParams.bizType = props.bizType
     queryParams.bizId = props.bizId
+    console.log('监听a', queryParams.bizId)
     getList()
   }
 )

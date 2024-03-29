@@ -17,15 +17,11 @@
             {{ contact.areaName }} {{ contact.detailAddress }}
           </el-descriptions-item>
           <el-descriptions-item label="职务">{{ contact.post }}</el-descriptions-item>
-          <el-descriptions-item label="直属上级">{{ contact.parentName }}</el-descriptions-item>
           <el-descriptions-item label="关键决策人">
             <dict-tag :type="DICT_TYPE.INFRA_BOOLEAN_STRING" :value="contact.master" />
           </el-descriptions-item>
           <el-descriptions-item label="性别">
             <dict-tag :type="DICT_TYPE.SYSTEM_USER_SEX" :value="contact.sex" />
-          </el-descriptions-item>
-          <el-descriptions-item label="下次联系时间">
-            {{ formatDate(contact.contactNextTime) }}
           </el-descriptions-item>
           <el-descriptions-item label="备注">{{ contact.remark }}</el-descriptions-item>
         </el-descriptions>
@@ -35,7 +31,6 @@
           <span class="text-base font-bold">系统信息</span>
         </template>
         <el-descriptions :column="4">
-          <el-descriptions-item label="负责人">{{ contact.ownerUserName }}</el-descriptions-item>
           <el-descriptions-item label="最后跟进记录">
             {{ contact.contactLastContent }}
           </el-descriptions-item>

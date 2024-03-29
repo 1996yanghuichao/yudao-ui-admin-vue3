@@ -126,7 +126,6 @@
         width="140"
         :formatter="erpPriceTableColumnFormatter"
       />
-      <el-table-column align="center" label="负责人" prop="ownerUserName" width="120" />
       <el-table-column align="center" label="所属部门" prop="ownerUserDeptName" width="100px" />
       <el-table-column
         :formatter="dateFormatter"

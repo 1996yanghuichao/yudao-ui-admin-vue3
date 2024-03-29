@@ -132,21 +132,21 @@
           <dict-tag :type="DICT_TYPE.INFRA_BOOLEAN_STRING" :value="scope.row.master" />
         </template>
       </el-table-column>
-      <el-table-column align="center" label="直属上级" prop="parentName" width="160">
+      <!-- <el-table-column align="center" label="直属上级" prop="parentName" width="160">
         <template #default="scope">
           <el-link :underline="false" type="primary" @click="openDetail(scope.row.parentId)">
             {{ scope.row.parentName }}
           </el-link>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="地址" align="center" prop="detailAddress" width="180" />
-      <el-table-column
+      <!-- <el-table-column
         :formatter="dateFormatter"
         align="center"
         label="下次联系时间"
         prop="contactNextTime"
         width="180px"
-      />
+      /> -->
       <el-table-column align="center" label="性别" prop="sex">
         <template #default="scope">
           <dict-tag :type="DICT_TYPE.SYSTEM_USER_SEX" :value="scope.row.sex" />
@@ -160,8 +160,6 @@
         prop="contactLastTime"
         width="180px"
       />
-      <el-table-column align="center" label="负责人" prop="ownerUserName" width="120" />
-      <el-table-column align="center" label="所属部门" prop="ownerUserDeptName" width="100" />
       <el-table-column
         :formatter="dateFormatter"
         align="center"

@@ -16,9 +16,7 @@
           <el-descriptions-item label="是否上下架">
             <dict-tag :type="DICT_TYPE.CRM_PRODUCT_STATUS" :value="product.status" />
           </el-descriptions-item>
-          <el-descriptions-item label="单位">
-            <dict-tag :type="DICT_TYPE.CRM_PRODUCT_UNIT" :value="product.unit" />
-          </el-descriptions-item>
+          <el-descriptions-item label="单位">{{product.unitName}}</el-descriptions-item>
         </el-descriptions>
       </el-collapse-item>
     </el-collapse>

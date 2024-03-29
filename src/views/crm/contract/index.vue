@@ -101,6 +101,7 @@
           </el-link>
         </template>
       </el-table-column>
+      <el-table-column align="center" label="门店" prop="storeName" width="160" />
       <el-table-column align="center" label="商机名称" prop="businessName" width="130">
         <template #default="scope">
           <el-link
