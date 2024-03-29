@@ -26,7 +26,7 @@
           ref="childGetProps"
         />
       </el-tab-pane>
-      <el-tab-pane label="团队成员">
+      <!-- <el-tab-pane label="团队成员">
         <PermissionList
           ref="permissionListRef"
           :biz-id="contract.id!"
@@ -34,7 +34,7 @@
           :show-action="false"
           @quit-team="close"
         />
-      </el-tab-pane>
+      </el-tab-pane> -->
       <el-tab-pane label="操作日志">
         <OperateLogV2 :log-list="logList" />
       </el-tab-pane>
