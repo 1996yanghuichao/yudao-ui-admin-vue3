@@ -59,6 +59,21 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="客户分类" prop="classId">
+        <el-select
+          v-model="queryParams.classId"
+          class="!w-240px"
+          clearable
+          placeholder="请选择客户分类"
+        >
+          <el-option
+            v-for="dict in getIntDictOptions(DICT_TYPE.CRM_CUSTOMER_CLASS)"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item label="客户来源" prop="source">
         <el-select
           v-model="queryParams.source"
@@ -112,12 +127,14 @@
           <dict-tag :type="DICT_TYPE.CRM_CUSTOMER_SOURCE" :value="scope.row.source" />
         </template>
       </el-table-column>
-      <el-table-column label="手机" align="center" prop="mobile" width="120" />
-      <el-table-column label="电话" align="center" prop="telephone" width="130" />
-      <el-table-column label="邮箱" align="center" prop="email" width="180" />
       <el-table-column align="center" label="客户级别" prop="level" width="135">
         <template #default="scope">
           <dict-tag :type="DICT_TYPE.CRM_CUSTOMER_LEVEL" :value="scope.row.level" />
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="客户分类" prop="classId" width="135">
+        <template #default="scope">
+          <dict-tag :type="DICT_TYPE.CRM_CUSTOMER_CLASS" :value="scope.row.classId" />
         </template>
       </el-table-column>
       <el-table-column align="center" label="客户行业" prop="industryId" width="100">
@@ -192,6 +209,7 @@ const queryParams = ref({
   mobile: '',
   industryId: undefined,
   level: undefined,
+  classId: undefined,
   source: undefined,
   sceneType: undefined,
   pool: true
@@ -227,6 +245,7 @@ const resetQuery = () => {
     mobile: '',
     industryId: undefined,
     level: undefined,
+    classId: undefined,
     source: undefined,
     sceneType: undefined,
     pool: true

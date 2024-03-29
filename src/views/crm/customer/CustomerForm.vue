@@ -71,10 +71,10 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="客户分类" prop="level">
-            <el-select v-model="formData.level" placeholder="客户分类-没联调" class="w-1/1">
+          <el-form-item label="客户分类" prop="classId">
+            <el-select v-model="formData.classId" placeholder="请选择客户分类" class="w-1/1">
               <el-option
-                v-for="dict in getIntDictOptions(DICT_TYPE.CRM_CUSTOMER_LEVEL)"
+                v-for="dict in getIntDictOptions(DICT_TYPE.CRM_CUSTOMER_CLASS)"
                 :key="dict.value"
                 :label="dict.label"
                 :value="dict.value"
@@ -142,6 +142,7 @@ const formData = ref({
   detailAddress: undefined,
   industryId: undefined,
   level: undefined,
+  classId: undefined,
   source: undefined,
   remark: undefined
 })
@@ -213,6 +214,7 @@ const resetForm = () => {
     detailAddress: undefined,
     industryId: undefined,
     level: undefined,
+    classId: undefined,
     source: undefined,
     remark: undefined
   }

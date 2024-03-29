@@ -68,11 +68,11 @@
       <el-table-column label="产品单位" align="center" prop="unitName" />
       <el-table-column label="产品编码" align="center" prop="no" />
       <el-table-column
-        label="价格（元）"
+        label="购入价格（元）"
         align="center"
         prop="price"
         :formatter="erpPriceTableColumnFormatter"
-        width="100"
+        width="130"
       />
       <el-table-column label="产品描述" align="center" prop="description" width="150" />
       <el-table-column label="上架状态" align="center" prop="status" width="120">
@@ -80,7 +80,6 @@
           <dict-tag :type="DICT_TYPE.CRM_PRODUCT_STATUS" :value="scope.row.status" />
         </template>
       </el-table-column>
-      <el-table-column label="负责人" align="center" prop="ownerUserName" width="120" />
       <el-table-column
         label="更新时间"
         align="center"

@@ -199,6 +199,7 @@ export enum DICT_TYPE {
   CRM_RECEIVABLE_RETURN_TYPE = 'crm_receivable_return_type', // CRM 回款的还款方式
   CRM_CUSTOMER_INDUSTRY = 'crm_customer_industry',
   CRM_CUSTOMER_LEVEL = 'crm_customer_level',
+  CRM_CUSTOMER_CLASS = 'crm_customer_class',
   CRM_CUSTOMER_SOURCE = 'crm_customer_source',
   CRM_PRODUCT_STATUS = 'crm_product_status',
   CRM_PERMISSION_LEVEL = 'crm_permission_level', // CRM 数据权限的级别

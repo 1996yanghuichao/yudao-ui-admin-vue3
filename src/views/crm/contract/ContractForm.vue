@@ -73,20 +73,19 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="门店" prop="ownerUserId">
-            <!-- <el-select
-              v-model="formData.ownerUserId"
-              :disabled="formType !== 'create'"
+          <el-form-item label="门店" prop="storeId">
+            <el-select
+              v-model="formData.storeId"
               class="w-1/1"
             >
               <el-option
-                v-for="item in userOptions"
+                v-for="item in simpleList"
                 :key="item.id"
-                :label="item.nickname"
+                :label="item.name"
                 :value="item.id"
               />
-            </el-select> -->
-            <span>未联调</span>
+            </el-select>
+            <!-- <span>未联调</span> -->
           </el-form-item>
         </el-col>
       </el-row>
@@ -208,13 +207,13 @@
           </el-form-item>
         </el-col>
         <el-col :span="10">
-          <el-form-item label="销售运费价格" prop="totalPrice">
-            <!-- <el-input
-              v-model="formData.totalPrice"
+          <el-form-item label="销售运费价格" prop="saleTransportPrice">
+            <el-input
+              v-model="formData.saleTransportPrice"
               placeholder="请输入销售运费价格"
-              :formatter="erpPriceTableColumnFormattere"
-            /> -->
-            <span>未联调</span>
+              :min="0"
+            />
+            <!-- <span>未联调</span> -->
           </el-form-item>
         </el-col>
       </el-row>
@@ -254,9 +253,11 @@ const formData = ref({
   signUserId: undefined,
   signContactId: undefined,
   ownerUserId: undefined,
+  storeId: undefined,
   ownerUserName: undefined,
   discountPercent: 0,
   totalProductPrice: undefined,
+  saleTransportPrice: undefined,
   remark: undefined,
   products: []
 })
@@ -264,11 +265,13 @@ const formRules = reactive({
   name: [{ required: true, message: '合同名称不能为空', trigger: 'blur' }],
   customerId: [{ required: true, message: '客户不能为空', trigger: 'blur' }],
   orderDate: [{ required: true, message: '下单日期不能为空', trigger: 'blur' }],
-  ownerUserId: [{ required: true, message: '负责人不能为空', trigger: 'blur' }]
+  ownerUserId: [{ required: true, message: '负责人不能为空', trigger: 'blur' }],
+  storeId: [{ required: true, message: '门店不能为空', trigger: 'blur' }],
 })
 const formRef = ref() // 表单 Ref
 const userOptions = ref<UserApi.UserVO[]>([]) // 用户列表
 const customerList = ref([]) // 客户列表的数据
+const simpleList = ref([]) // 门店列表的数据
 const businessList = ref<BusinessApi.BusinessVO[]>([])
 const contactList = ref<ContactApi.ContactVO[]>([])
 
@@ -323,6 +326,8 @@ const open = async (type: string, id?: number) => {
   contactList.value = await ContactApi.getSimpleContactList()
   // 获得商机列表
   businessList.value = await BusinessApi.getSimpleBusinessList()
+  // 门店列表
+  simpleList.value = await ContractApi.getListAllSimple()
 }
 defineExpose({ open }) // 提供 open 方法，用于打开弹窗
 
@@ -367,9 +372,11 @@ const resetForm = () => {
     signUserId: undefined,
     signContactId: undefined,
     ownerUserId: undefined,
+    storeId: undefined,
     ownerUserName: undefined,
     discountPercent: 0,
     totalProductPrice: undefined,
+    saleTransportPrice: undefined,
     remark: undefined,
     products: []
   }

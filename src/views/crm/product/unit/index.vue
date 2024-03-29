@@ -18,13 +18,27 @@
         />
       </el-form-item>
       <el-form-item label="单位状态" prop="status">
-        <el-select
+        <!-- <el-select
           v-model="queryParams.status"
           placeholder="请选择单位状态"
           clearable
           class="!w-240px"
         >
           <el-option label="请选择字典生成" value="" />
+        </el-select> -->
+
+        <el-select
+          v-model="queryParams.status"
+          class="!w-240px"
+          clearable
+          placeholder="请选择单位状态"
+        >
+          <el-option
+            v-for="dict in getIntDictOptions(DICT_TYPE.COMMON_STATUS)"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="创建者" prop="creator">
@@ -76,7 +90,11 @@
     <el-table v-loading="loading" :data="list" :stripe="true" :show-overflow-tooltip="true">
       <el-table-column label="单位编号" align="center" prop="id" />
       <el-table-column label="单位名字" align="center" prop="name" />
-      <el-table-column label="单位状态" align="center" prop="status" />
+      <el-table-column align="center" label="单位状态" prop="status">
+        <template #default="scope">
+          <dict-tag :type="DICT_TYPE.COMMON_STATUS" :value="scope.row.status" />
+        </template>
+      </el-table-column>
       <el-table-column label="创建者" align="center" prop="creator" />
       <el-table-column
         label="创建时间"
@@ -120,6 +138,7 @@
 </template>
 
 <script setup lang="ts">
+import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
 import { dateFormatter } from '@/utils/formatTime'
 import download from '@/utils/download'
 import { ProductUnitApi, ProductUnitVO } from '@/api/crm/product'

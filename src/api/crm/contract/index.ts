@@ -112,3 +112,8 @@ export const getAuditContractCount = async () => {
 export const getRemindContractCount = async () => {
   return await request.get({ url: '/crm/contract/remind-count' })
 }
+
+// 门店列表
+export const getListAllSimple = async () => {
+  return await request.get({ url: `/crm/store/list-all-simple` })
+}
