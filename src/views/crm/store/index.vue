@@ -17,7 +17,22 @@
           class="!w-240px"
         />
       </el-form-item>
-      <el-form-item label="门店简介" prop="introduction">
+      <el-form-item label="门店状态" prop="status">
+        <el-select
+          v-model="queryParams.status"
+          placeholder="请选择门店状态"
+          clearable
+          class="!w-240px"
+        >
+          <el-option
+            v-for="dict in getIntDictOptions(DICT_TYPE.COMMON_STATUS)"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
+      <!-- <el-form-item label="门店简介" prop="introduction">
         <el-input
           v-model="queryParams.introduction"
           placeholder="请输入门店简介"
@@ -102,21 +117,6 @@
           class="!w-240px"
         />
       </el-form-item>
-      <el-form-item label="门店状态" prop="status">
-        <el-select
-          v-model="queryParams.status"
-          placeholder="请选择门店状态"
-          clearable
-          class="!w-240px"
-        >
-          <el-option
-            v-for="dict in getIntDictOptions(DICT_TYPE.COMMON_STATUS)"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
-        </el-select>
-      </el-form-item>
       <el-form-item label="创建时间" prop="createTime">
         <el-date-picker
           v-model="queryParams.createTime"
@@ -127,7 +127,7 @@
           :default-time="[new Date('1 00:00:00'), new Date('1 23:59:59')]"
           class="!w-240px"
         />
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button @click="handleQuery"><Icon icon="ep:search" class="mr-5px" /> 搜索</el-button>
         <el-button @click="resetQuery"><Icon icon="ep:refresh" class="mr-5px" /> 重置</el-button>

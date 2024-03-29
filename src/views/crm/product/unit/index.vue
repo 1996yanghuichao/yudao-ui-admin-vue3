@@ -18,15 +18,6 @@
         />
       </el-form-item>
       <el-form-item label="单位状态" prop="status">
-        <!-- <el-select
-          v-model="queryParams.status"
-          placeholder="请选择单位状态"
-          clearable
-          class="!w-240px"
-        >
-          <el-option label="请选择字典生成" value="" />
-        </el-select> -->
-
         <el-select
           v-model="queryParams.status"
           class="!w-240px"

@@ -11,9 +11,18 @@
         <el-input v-model="formData.name" placeholder="请输入单位名字" />
       </el-form-item>
       <el-form-item label="单位状态" prop="status">
-        <el-radio-group v-model="formData.status">
-          <el-radio label="1">请选择字典生成</el-radio>
-        </el-radio-group>
+        <el-select
+          v-model="formData.status"
+          clearable
+          placeholder="请选择单位状态"
+        >
+          <el-option
+            v-for="dict in getIntDictOptions(DICT_TYPE.COMMON_STATUS)"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -24,6 +33,7 @@
 </template>
 <script setup lang="ts">
 import { ProductUnitApi, ProductUnitVO } from '@/api/crm/product'
+import { DICT_TYPE, getIntDictOptions } from '@/utils/dict'
 
 /** CRM 产品单位 表单 */
 defineOptions({ name: 'ProductUnitForm' })
