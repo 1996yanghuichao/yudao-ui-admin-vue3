@@ -59,7 +59,7 @@
               <el-option
                 v-for="data in contractList"
                 :key="data.id"
-                :label="data.id!+ '-'+data.name"
+                :label="data.no+ '-'+data.name"
                 :value="data.id!"
                 :disabled="data.auditStatus !== 20"
               />

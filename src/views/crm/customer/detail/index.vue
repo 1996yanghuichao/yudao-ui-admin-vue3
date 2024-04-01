@@ -39,14 +39,14 @@
   </CustomerDetailsHeader>
   <el-col>
     <el-tabs>
-      <el-tab-pane label="跟进记录">
+      <!-- <el-tab-pane label="跟进记录">
         <FollowUpList :biz-id="customerId" :biz-type="BizTypeEnum.CRM_CUSTOMER" />
-      </el-tab-pane>
+      </el-tab-pane> -->
       <el-tab-pane label="基本信息">
         <CustomerDetailsInfo :customer="customer" />
       </el-tab-pane>
       <el-tab-pane label="联系人" lazy>
-        <ContactList :biz-id="customer.id!" :biz-type="BizTypeEnum.CRM_CUSTOMER" />
+        <ContactList :biz-id="customer.id!" :biz-type="BizTypeEnum.CRM_CUSTOMER" :customer-id="customer.id!"/>
       </el-tab-pane>
       <el-tab-pane label="团队成员">
         <PermissionList
@@ -58,15 +58,15 @@
         />
       </el-tab-pane>
       <el-tab-pane label="商机" lazy>
-        <BusinessList :biz-id="customer.id!" :biz-type="BizTypeEnum.CRM_CUSTOMER" />
+        <BusinessList :biz-id="customer.id!" :biz-type="BizTypeEnum.CRM_CUSTOMER" :customer-id="customer.id!"/>
       </el-tab-pane>
       <el-tab-pane label="合同" lazy>
-        <ContractList :biz-id="customer.id!" :biz-type="BizTypeEnum.CRM_CUSTOMER" />
+        <ContractList :biz-id="customer.id!" :biz-type="BizTypeEnum.CRM_CUSTOMER" :customer-id="customer.id!"/>
       </el-tab-pane>
-      <el-tab-pane label="回款" lazy>
+      <!-- <el-tab-pane label="回款" lazy>
         <ReceivablePlanList :customer-id="customer.id!" @create-receivable="createReceivable" />
         <ReceivableList ref="receivableListRef" :customer-id="customer.id!" />
-      </el-tab-pane>
+      </el-tab-pane> -->
       <el-tab-pane label="操作日志">
         <OperateLogV2 :log-list="logList" />
       </el-tab-pane>

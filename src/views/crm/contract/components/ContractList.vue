@@ -116,7 +116,7 @@ const handleQuery = () => {
 /** 添加 */
 const formRef = ref()
 const openForm = () => {
-  formRef.value.open('create')
+  formRef.value.open('create', undefined, props.bizId)
 }
 
 /** 打开合同详情 */

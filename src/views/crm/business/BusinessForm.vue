@@ -98,7 +98,7 @@
       <el-row>
         <el-col :span="8">
           <el-form-item label="产品总金额" prop="totalProductPrice">
-            <el-input
+            <el-input-number
               disabled
               v-model="formData.totalProductPrice"
               :formatter="erpPriceTableColumnFormatter"
@@ -119,7 +119,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="折扣后金额" prop="price">
-            <el-input
+            <el-input-number
               disabled
               v-model="formData.totalPrice"
               placeholder="请输入商机金额"
@@ -155,7 +155,7 @@ const formData = ref({
   id: undefined,
   name: undefined,
   customerId: undefined,
-  ownerUserId: undefined,
+  ownerUserId: '',
   statusTypeId: undefined,
   dealTime: undefined,
   discountPercent: 0,
@@ -233,7 +233,7 @@ const open = async (type: string, id?: number, customerId?: number, contactId?: 
   userOptions.value = await UserApi.getSimpleUserList()
   // 默认新建时选中自己
   if (formType.value === 'create') {
-    formData.value.ownerUserId = useUserStore().getUser.id
+    formData.value.ownerUserId = useUserStore().getUser.id.toString()
   }
 }
 defineExpose({ open }) // 提供 open 方法，用于打开弹窗

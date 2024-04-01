@@ -177,7 +177,7 @@
             <el-input
               disabled
               v-model="formData.totalProductPrice"
-              :formatter="erpPriceTableColumnFormatter"
+              placeholder="请输入产品总金额"
             />
           </el-form-item>
         </el-col>
@@ -202,7 +202,6 @@
               disabled
               v-model="formData.totalPrice"
               placeholder="请输入商机金额"
-              :formatter="erpPriceTableColumnFormattere"
             />
           </el-form-item>
         </el-col>
@@ -300,7 +299,7 @@ watch(
 )
 
 /** 打开弹窗 */
-const open = async (type: string, id?: number) => {
+const open = async (type: string, id?: number , bizId?: number) => {
   dialogVisible.value = true
   dialogTitle.value = t('action.' + type)
   formType.value = type
@@ -328,6 +327,12 @@ const open = async (type: string, id?: number) => {
   businessList.value = await BusinessApi.getSimpleBusinessList()
   // 门店列表
   simpleList.value = await ContractApi.getListAllSimple()
+
+  // 客户名称带入
+  if(bizId) {
+    formData.value.customerId = bizId
+    handleCustomerChange()
+  }
 }
 defineExpose({ open }) // 提供 open 方法，用于打开弹窗
 
