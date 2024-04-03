@@ -21,7 +21,7 @@
         {{ contract.customerName }}
       </el-descriptions-item>
       <el-descriptions-item label="合同金额（元）">
-        {{ erpPriceInputFormatter(contract.totalPrice) }}
+        {{ erpPriceInputFormatter(contract.orderPrice) }}
       </el-descriptions-item>
       <el-descriptions-item label="下单时间">
         {{ formatDate(contract.orderDate) }}

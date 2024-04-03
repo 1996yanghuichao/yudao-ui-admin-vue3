@@ -27,8 +27,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="产品单位" prop="unit">
-            <el-select v-model="formData.unit" class="w-1/1" placeholder="请选择单位">
+          <el-form-item label="产品单位" prop="unitId">
+            <el-select v-model="formData.unitId" class="w-1/1" placeholder="请选择单位">
               <el-option
                 v-for="unit in unitList"
                 :key="unit.id"
@@ -104,7 +104,7 @@ const formData = ref({
   id: undefined,
   name: undefined,
   no: undefined,
-  unit: undefined,
+  unitId: undefined,
   price: Number(undefined),
   status: undefined,
   categoryId: undefined,
@@ -172,7 +172,7 @@ const resetForm = () => {
     id: undefined,
     name: undefined,
     no: undefined,
-    unit: undefined,
+    unitId: undefined,
     price: Number(undefined),
     status: undefined,
     categoryId: undefined,

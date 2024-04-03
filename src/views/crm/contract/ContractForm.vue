@@ -215,6 +215,17 @@
             <!-- <span>未联调</span> -->
           </el-form-item>
         </el-col>
+        <el-col :span="10">
+          <el-form-item label="整单金额" prop="orderPrice">
+            <el-input
+              v-model="formData.orderPrice"
+              placeholder="请输入整单金额"
+              :min="0"
+              disabled
+            />
+            <!-- <span>未联调</span> -->
+          </el-form-item>
+        </el-col>
       </el-row>
     </el-form>
     <template #footer>
@@ -257,6 +268,7 @@ const formData = ref({
   discountPercent: 0,
   totalProductPrice: undefined,
   saleTransportPrice: undefined,
+  orderPrice: undefined,
   remark: undefined,
   products: []
 })
@@ -294,6 +306,8 @@ watch(
     // 赋值
     formData.value.totalProductPrice = totalProductPrice
     formData.value.totalPrice = totalPrice
+    // 整单金额
+    formData.value.orderPrice = Number(formData.value.totalPrice) + Number(formData.value.saleTransportPrice)
   },
   { deep: true }
 )
@@ -382,6 +396,7 @@ const resetForm = () => {
     discountPercent: 0,
     totalProductPrice: undefined,
     saleTransportPrice: undefined,
+    orderPrice: undefined,
     remark: undefined,
     products: []
   }

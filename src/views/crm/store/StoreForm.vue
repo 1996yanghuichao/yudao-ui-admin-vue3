@@ -23,23 +23,27 @@
         <el-input v-model="formData.detailAddress" placeholder="请输入门店详细地址" />
       </el-form-item>
       <el-form-item label="门店 logo" prop="logo">
-        <el-input v-model="formData.logo" placeholder="请输入门店 logo" />
+        <!-- <el-input v-model="formData.logo" placeholder="请输入门店 logo" /> -->
+        <UploadImg v-model="formData.logo" :limit="1" :is-show-tip="false" />
+        <div style="font-size: 10px" class="pl-10px">推荐 180x180 图片分辨率</div>
       </el-form-item>
       <el-form-item label="营业开始时间" prop="openingTime">
-        <el-date-picker
-          v-model="formData.openingTime"
-          type="date"
-          value-format="x"
-          placeholder="选择营业开始时间"
-        />
+        <el-time-select
+              v-model="formData.openingTime"
+              placeholder="选择营业开始时间"
+              start="00:00"
+              step="00:15"
+              end="23:59"
+            />
       </el-form-item>
       <el-form-item label="营业结束时间" prop="closingTime">
-        <el-date-picker
-          v-model="formData.closingTime"
-          type="date"
-          value-format="x"
-          placeholder="选择营业结束时间"
-        />
+        <el-time-select
+              v-model="formData.closingTime"
+              placeholder="选择营业结束时间"
+              start="00:00"
+              step="00:15"
+              end="23:59"
+            />
       </el-form-item>
       <el-form-item label="纬度" prop="latitude">
         <el-input v-model="formData.latitude" placeholder="请输入纬度" />
