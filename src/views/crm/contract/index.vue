@@ -116,7 +116,7 @@
       <el-table-column
         align="center"
         label="合同金额（元）"
-        prop="totalPrice"
+        prop="orderPrice"
         width="140"
         :formatter="erpPriceTableColumnFormatter"
       />
