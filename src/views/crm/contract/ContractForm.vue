@@ -307,7 +307,10 @@ watch(
     formData.value.totalProductPrice = totalProductPrice
     formData.value.totalPrice = totalPrice
     // 整单金额
-    formData.value.orderPrice = Number(formData.value.totalPrice) + Number(formData.value.saleTransportPrice)
+    console.log('===', formData.value)
+    let saleTransportPrice = formData.value.saleTransportPrice == undefined ? '0' : formData.value.saleTransportPrice
+    let totalPriceVal = formData.value.totalPrice == undefined ? '0' : formData.value.totalPrice
+    formData.value.orderPrice = Number(totalPriceVal) + Number(saleTransportPrice)
   },
   { deep: true }
 )
