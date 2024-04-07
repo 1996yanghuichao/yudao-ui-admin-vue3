@@ -23,7 +23,7 @@
           </el-link>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="合同编号" prop="contractNo" width="180">
+      <!-- <el-table-column align="center" label="合同编号" prop="contractNo" width="180">
         <template #default="scope">
           <el-link
             :underline="false"
@@ -33,7 +33,13 @@
             {{ scope.row.contract.no }}
           </el-link>
         </template>
-      </el-table-column>
+      </el-table-column> -->
+      <el-table-column
+        align="center"
+        label="合同编号"
+        prop="no"
+        width="180"
+      />
       <el-table-column
         :formatter="dateFormatter2"
         align="center"
@@ -83,7 +89,7 @@
           <dict-tag :type="DICT_TYPE.CRM_AUDIT_STATUS" :value="scope.row.auditStatus" />
         </template>
       </el-table-column>
-      <el-table-column align="center" fixed="right" label="操作" width="180px">
+      <!-- <el-table-column align="center" fixed="right" label="操作" width="180px">
         <template #default="scope">
           <el-button
             v-hasPermi="['crm:receivable:update']"
@@ -93,7 +99,7 @@
           >
             编辑
           </el-button>
-          <!-- <el-button
+          <el-button
             v-if="scope.row.auditStatus === 0"
             v-hasPermi="['crm:receivable:update']"
             link
@@ -110,7 +116,7 @@
             @click="handleProcessDetail(scope.row)"
           >
             查看审批
-          </el-button> -->
+          </el-button>
           <el-button
             v-hasPermi="['crm:receivable:delete']"
             link
@@ -120,7 +126,7 @@
             删除
           </el-button>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     <!-- 分页 -->
     <Pagination
