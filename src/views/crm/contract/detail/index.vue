@@ -49,7 +49,7 @@
 import {ref} from 'vue'
 import {useRouter, useRoute} from 'vue-router'
 import { useTagsViewStore } from '@/store/modules/tagsView'
-import { OperateLogV2VO } from '@/api/system/operatelog'
+import { OperateLogVO } from '@/api/system/operatelog'
 import * as ContractApi from '@/api/crm/contract'
 import ContractDetailsInfo from './ContractDetailsInfo.vue'
 import ContractDetailsHeader from './ContractDetailsHeader.vue'
@@ -91,7 +91,7 @@ const getContractData = async () => {
 }
 
 /** 获取操作日志 */
-const logList = ref<OperateLogV2VO[]>([]) // 操作日志列表
+const logList = ref<OperateLogVO[]>([]) // 操作日志列表
 const getOperateLog = async (contractId: number) => {
   if (!contractId) {
     return
