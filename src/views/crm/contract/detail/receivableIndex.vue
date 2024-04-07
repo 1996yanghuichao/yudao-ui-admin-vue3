@@ -93,7 +93,7 @@
           >
             编辑
           </el-button>
-          <el-button
+          <!-- <el-button
             v-if="scope.row.auditStatus === 0"
             v-hasPermi="['crm:receivable:update']"
             link
@@ -110,7 +110,7 @@
             @click="handleProcessDetail(scope.row)"
           >
             查看审批
-          </el-button>
+          </el-button> -->
           <el-button
             v-hasPermi="['crm:receivable:delete']"
             link
