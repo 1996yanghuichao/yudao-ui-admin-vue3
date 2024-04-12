@@ -212,3 +212,8 @@ onMounted(() => {
   getList()
 })
 </script>
+<style lang="scss" scoped>
+.el-form-item{
+  margin-right: 25px;
+}
+</style>
