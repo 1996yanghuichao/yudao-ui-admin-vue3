@@ -18,10 +18,10 @@
             <template #append>%</template>
           </el-input>
         </el-form-item>
-        <el-form-item label-width="180px" label="公众号 APPID" prop="config.appId">
+        <el-form-item label-width="180px" label="微信 APPID" prop="config.appId">
           <el-input
             v-model="formData.config.appId"
-            placeholder="请输入公众号 APPID"
+            placeholder="请输入微信 APPID"
             clearable
             :style="{ width: '100%' }"
           />
@@ -80,7 +80,8 @@
               :http-request="keyContentUpload"
             >
               <el-button type="primary">
-                <Icon icon="ep:upload" class="mr-5px" /> 点击上传
+                <Icon icon="ep:upload" class="mr-5px" />
+                点击上传
               </el-button>
             </el-upload>
           </el-form-item>
@@ -120,7 +121,8 @@
               :http-request="privateKeyContentUpload"
             >
               <el-button type="primary">
-                <Icon icon="ep:upload" class="mr-5px" /> 点击上传
+                <Icon icon="ep:upload" class="mr-5px" />
+                点击上传
               </el-button>
             </el-upload>
           </el-form-item>
@@ -148,7 +150,8 @@
               :http-request="privateCertContentUpload"
             >
               <el-button type="primary">
-                <Icon icon="ep:upload" class="mr-5px" /> 点击上传
+                <Icon icon="ep:upload" class="mr-5px" />
+                点击上传
               </el-button>
             </el-upload>
           </el-form-item>
@@ -310,7 +313,7 @@ const pemFileBeforeUpload = (file) => {
 /**
  * 读取 apiclient_key.pem 到 privateKeyContent 字段
  */
-const privateKeyContentUpload = (event) => {
+const privateKeyContentUpload = async (event) => {
   const readFile = new FileReader()
   readFile.onload = (e: any) => {
     formData.value.config.privateKeyContent = e.target.result
@@ -321,7 +324,7 @@ const privateKeyContentUpload = (event) => {
 /**
  * 读取 apiclient_cert.pem 到 privateCertContent 字段
  */
-const privateCertContentUpload = (event) => {
+const privateCertContentUpload = async (event) => {
   const readFile = new FileReader()
   readFile.onload = (e: any) => {
     formData.value.config.privateCertContent = e.target.result
@@ -332,7 +335,7 @@ const privateCertContentUpload = (event) => {
 /**
  * 读取 apiclient_cert.p12 到 keyContent 字段
  */
-const keyContentUpload = (event) => {
+const keyContentUpload = async (event) => {
   const readFile = new FileReader()
   readFile.onload = (e: any) => {
     formData.value.config.keyContent = e.target.result.split(',')[1]

@@ -109,6 +109,14 @@ export const PayChannelEnum = {
     code: 'wx_app',
     name: '微信 APP 支付'
   },
+  WX_NATIVE: {
+    code: 'wx_native',
+    name: '微信 Native 支付'
+  },
+  WX_WAP: {
+    code: 'wx_wap',
+    name: '微信 WAP 网站支付'
+  },
   WX_BAR: {
     code: 'wx_bar',
     name: '微信条码支付'
@@ -248,15 +256,15 @@ export const CouponTemplateTakeTypeEnum = {
  */
 export const PromotionProductScopeEnum = {
   ALL: {
-    scope: 10,
+    scope: 1,
     name: '通用劵'
   },
   SPU: {
-    scope: 20,
+    scope: 2,
     name: '商品劵'
   },
   CATEGORY: {
-    scope: 30,
+    scope: 3,
     name: '品类劵'
   }
 }

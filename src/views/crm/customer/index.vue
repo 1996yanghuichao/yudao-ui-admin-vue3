@@ -94,7 +94,7 @@
           <Icon class="mr-5px" icon="ep:search" />
           搜索
         </el-button>
-        <el-button @click="resetQuery(undefined)">
+        <el-button @click="resetQuery">
           <Icon class="mr-5px" icon="ep:refresh" />
           重置
         </el-button>
@@ -128,7 +128,7 @@
       <el-tab-pane label="下属负责的" name="3" />
     </el-tabs>
     <el-table v-loading="loading" :data="list" :show-overflow-tooltip="true" :stripe="true">
-      <el-table-column align="center" label="客户名称" fixed="left" prop="name" width="160">
+      <el-table-column align="center" fixed="left" label="客户名称" prop="name" width="160">
         <template #default="scope">
           <el-link :underline="false" type="primary" @click="openDetail(scope.row.id)">
             {{ scope.row.name }}
@@ -181,7 +181,7 @@
         width="180px"
       />
       <el-table-column align="center" label="最后跟进记录" prop="contactLastContent" width="200" />
-      <el-table-column label="地址" align="center" prop="detailAddress" width="180" />
+      <el-table-column align="center" label="地址" prop="detailAddress" width="180" />
       <el-table-column align="center" label="距离进入公海天数" prop="poolDay" width="140">
         <template #default="scope"> {{ scope.row.poolDay }} 天</template>
       </el-table-column>
@@ -272,7 +272,7 @@ const activeName = ref('1') // 列表 tab
 
 /** tab 切换 */
 const handleTabClick = (tab: TabsPaneContext) => {
-  queryParams.sceneType = tab.paneName
+  queryParams.sceneType = tab.paneName as string
   handleQuery()
 }
 
